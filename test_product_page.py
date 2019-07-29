@@ -5,45 +5,6 @@ from .pages.login_page import LoginPage
 import pytest
 import time
 
-'''''
-@pytest.mark.xfail
-#отрицательная проверка
-def test_guest_cant_see_success_message_after_adding_product_to_cart(browser):
-    link = "http://selenium1py.pythonanywhere.com/en-gb/catalogue/coders-at-work_207/"
-    page = ProductPage(browser, link)
-    page.open()
-    page.add_to_basket()
-    page.should_not_be_success_message()
-
-#положительная проверка
-def test_guest_cant_see_success_message(browser):
-    link = "http://selenium1py.pythonanywhere.com/en-gb/catalogue/coders-at-work_207/"
-    page = ProductPage(browser, link)
-    page.open()
-    page.should_not_be_success_message()
-
-
-test_message_disappeared_after_adding_product_to_cart:
-Открываем
-страницу
-товара
-Добавляем
-товар
-в
-корзину
-Проверяем, что
-нет
-сообщения
-об
-успехе
-с
-помощью
-is_disappeared
-
-
-'''
-
-
 @pytest.mark.parametrize('link', ["http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer0",
                                   "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer9"])
 @pytest.mark.need_review
@@ -99,6 +60,7 @@ class TestUserAddToCartFromProductPage(object):
         page.open()
         page.register_new_user(email=str(time.time()) + "@fakemail.org", password=str(time.time()) + 'Password')
         page.should_be_authorized_user()
+        yield
 
     @pytest.mark.parametrize('link',
                              ["http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer0",
